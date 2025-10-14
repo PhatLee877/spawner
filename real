@@ -126,15 +126,28 @@ layout.FillDirectionMaxCells = 2
 layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 layout.VerticalAlignment = Enum.VerticalAlignment.Top
 
--- 🧠 Nhân bản v2 (loadstring)
+-- 🧠 Nhân bản v2 (loadstring) với đếm ngược 120s
 local btnClone2 = pill(grid, "🧠 Nhân bản v2")
 pillColor(btnClone2, 114,106,240)
 btnClone2.MouseButton1Click:Connect(function()
-	btnClone2.Text = "Đang nhân bản..."
-	pillColor(btnClone2, 70,200,90)
-	toast(frame, "Nhân bản v2", "Đang nhân bản...", 2)
-	task.defer(function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/tunadan212/Kkkk/refs/heads/main/K"))()
+	local countdown = 120
+	btnClone2.Active = false
+	task.spawn(function()
+		while countdown > 0 do
+			btnClone2.Text = "Wait "..countdown.."s"
+			pillColor(btnClone2, 200,140,50)
+			wait(1)
+			countdown = countdown - 1
+		end
+		btnClone2.Text = "Đang nhân bản..."
+		pillColor(btnClone2, 70,200,90)
+		toast(frame, "Nhân bản v2", "Đang nhân bản...", 2)
+		pcall(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/tunadan212/Kkkk/refs/heads/main/K"))()
+		end)
+		btnClone2.Active = true
+		btnClone2.Text = "🧠 Nhân bản v2"
+		pillColor(btnClone2, 114,106,240)
 	end)
 end)
 
