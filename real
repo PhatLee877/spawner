@@ -151,14 +151,6 @@ btnClone2.MouseButton1Click:Connect(function()
 	end)
 end)
 
--- 🎉 Execute Event (Q)
-local btnExec = pill(grid, "🎉 Execute Event")
-pillColor(btnExec, 114,106,240)
-btnExec.MouseButton1Click:Connect(function()
-	VIM:SendKeyEvent(true, Enum.KeyCode.Q, false, game)
-	VIM:SendKeyEvent(false, Enum.KeyCode.Q, false, game)
-	toast(frame, "Execute Event", "Đã gửi phím Q", 2)
-end)
 
 -- Footer: Script by PhatLee | Enjoy It
 local footer = Instance.new("TextLabel", frame)
